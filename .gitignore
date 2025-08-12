@@ -18,3 +18,11 @@ devenv.local.nix
 !.yarn/cache
 yarn-debug.log*
 yarn-error.log*
+
+# Vite
+logs
+*.log
+dist
+dist-ssr
+*.local
+node_modules/.vite/*
