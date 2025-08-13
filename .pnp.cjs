@@ -29,6 +29,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./",\
         "packageDependencies": [\
           ["passwordbook", "workspace:."],\
+          ["prettier", "npm:3.6.2"],\
           ["typescript", "patch:typescript@npm%3A5.8.3#optional!builtin<compat/typescript>::version=5.8.3&hash=5786d5"],\
           ["vite", "virtual:700539ed96801a2f5bc04563dcc1de57bf210c777761a7187db83c7ad476111e5b8cd2aef6d724742caaa19550ffe4bbd02fcfcdde164446e20f4679fa22e82b#npm:7.1.2"]\
         ],\
@@ -1155,6 +1156,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./",\
         "packageDependencies": [\
           ["passwordbook", "workspace:."],\
+          ["prettier", "npm:3.6.2"],\
           ["typescript", "patch:typescript@npm%3A5.8.3#optional!builtin<compat/typescript>::version=5.8.3&hash=5786d5"],\
           ["vite", "virtual:700539ed96801a2f5bc04563dcc1de57bf210c777761a7187db83c7ad476111e5b8cd2aef6d724742caaa19550ffe4bbd02fcfcdde164446e20f4679fa22e82b#npm:7.1.2"]\
         ],\
@@ -1207,6 +1209,15 @@ const RAW_RUNTIME_STATE =
           ["picocolors", "npm:1.1.1"],\
           ["postcss", "npm:8.5.6"],\
           ["source-map-js", "npm:1.2.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["prettier", [\
+      ["npm:3.6.2", {\
+        "packageLocation": "./.yarn/unplugged/prettier-npm-3.6.2-2668152203/node_modules/prettier/",\
+        "packageDependencies": [\
+          ["prettier", "npm:3.6.2"]\
         ],\
         "linkType": "HARD"\
       }]\
