@@ -27,7 +27,7 @@ const readLine = async function* (reader: ReadableStreamDefaultReader<string>) {
 
 export type Wordlist = Map<number, string>;
 
-export const getWordlist = async (): Promise<Wordlist> => {
+export const loadWordlist = async (): Promise<Wordlist> => {
 	const response = await fetch("/eff_large_wordlist.txt");
 
 	if (!response.ok) {

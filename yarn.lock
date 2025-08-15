@@ -386,6 +386,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/isaac@npm:^0":
+  version: 0.0.3
+  resolution: "@types/isaac@npm:0.0.3"
+  checksum: 10c0/e8459fe322ca0343d6d537c3416ce2d4eba60c10237405ea983e5dec4b8c8e0c6a2abb1f15af35edd1931bb3f2b3941e0dad353526037fc16cfdce6ecfbd6b30
+  languageName: node
+  linkType: hard
+
 "abbrev@npm:^3.0.0":
   version: 3.0.1
   resolution: "abbrev@npm:3.0.1"
@@ -782,6 +789,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"isaac@npm:^0.0.5":
+  version: 0.0.5
+  resolution: "isaac@npm:0.0.5"
+  checksum: 10c0/dcc2c0ab625f617edbb3742547b4d317ce1634cf73a64960b507e2f695575939fd27ac973e8cc8a44751a7bd43896c319c880a5b216232be1bce9823941f6b81
+  languageName: node
+  linkType: hard
+
 "isexe@npm:^2.0.0":
   version: 2.0.0
   resolution: "isexe@npm:2.0.0"
@@ -1001,6 +1015,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "passwordbook@workspace:."
   dependencies:
+    "@types/isaac": "npm:^0"
+    isaac: "npm:^0.0.5"
     prettier: "npm:^3.6.2"
     typescript: "npm:~5.8.3"
     vite: "npm:^7.1.2"

@@ -28,6 +28,8 @@ const RAW_RUNTIME_STATE =
       [null, {\
         "packageLocation": "./",\
         "packageDependencies": [\
+          ["@types/isaac", "npm:0.0.3"],\
+          ["isaac", "npm:0.0.5"],\
           ["passwordbook", "workspace:."],\
           ["prettier", "npm:3.6.2"],\
           ["typescript", "patch:typescript@npm%3A5.8.3#optional!builtin<compat/typescript>::version=5.8.3&hash=5786d5"],\
@@ -526,6 +528,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["@types/isaac", [\
+      ["npm:0.0.3", {\
+        "packageLocation": "./.yarn/cache/@types-isaac-npm-0.0.3-809c2f80c5-e8459fe322.zip/node_modules/@types/isaac/",\
+        "packageDependencies": [\
+          ["@types/isaac", "npm:0.0.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["abbrev", [\
       ["npm:3.0.1", {\
         "packageLocation": "./.yarn/cache/abbrev-npm-3.0.1-a34d600e50-21ba8f574e.zip/node_modules/abbrev/",\
@@ -922,6 +933,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["isaac", [\
+      ["npm:0.0.5", {\
+        "packageLocation": "./.yarn/cache/isaac-npm-0.0.5-78c7a9d13a-dcc2c0ab62.zip/node_modules/isaac/",\
+        "packageDependencies": [\
+          ["isaac", "npm:0.0.5"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["isexe", [\
       ["npm:2.0.0", {\
         "packageLocation": "./.yarn/cache/isexe-npm-2.0.0-b58870bd2e-228cfa503f.zip/node_modules/isexe/",\
@@ -1155,6 +1175,8 @@ const RAW_RUNTIME_STATE =
       ["workspace:.", {\
         "packageLocation": "./",\
         "packageDependencies": [\
+          ["@types/isaac", "npm:0.0.3"],\
+          ["isaac", "npm:0.0.5"],\
           ["passwordbook", "workspace:."],\
           ["prettier", "npm:3.6.2"],\
           ["typescript", "patch:typescript@npm%3A5.8.3#optional!builtin<compat/typescript>::version=5.8.3&hash=5786d5"],\

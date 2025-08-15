@@ -13,8 +13,25 @@
 			<h1>Password Book</h1>
 			<p class="subtitle">Paper-based password management</p>
 		</header>
-		<div class="card">
-			<button id="password" type="button" disabled>Loading</button>
-		</div>
+		<main>
+			<div id="loader" class="loader">Loading</div>
+			<form id="generator" class="generator hidden" action="#">
+				<button id="generate" class="generate" type="button">Loading</button>
+				<div class="regenerateWrapper">
+					<label for="seed">Seed:</label>
+					<p
+						id="seed"
+						class="seed"
+						autocomplete="off"
+						spellcheck="false"
+						contenteditable="plaintext-only"
+					></p>
+					<button id="regenerate" class="regenerate" type="button">
+						Loading
+					</button>
+				</div>
+			</form>
+			<ul id="passphrases" class="passphrases"></ul>
+		</main>
 	</body>
 </html>

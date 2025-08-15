@@ -10,10 +10,12 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@types/isaac": "^0",
     "typescript": "~5.8.3",
     "vite": "^7.1.2"
   },
   "dependencies": {
+    "isaac": "^0.0.5",
     "prettier": "^3.6.2"
   }
 }
