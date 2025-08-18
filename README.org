@@ -5,16 +5,18 @@ TODO:
 
 - Target [[https://web.dev/baseline][Baseline]]
 - Eliminate build step
+- Improve seed phrase generation
+  - [[github.com/bitcoin/bips/blob/master/bip-0039.mediawiki][BIP39]] widely used scheme to generate seed phrases
+  - [[https://github.com/paulmillr/scure-bip39][scure-bip39]] JS implementation used by MetaMask
 - No runtime dependencies
   - [[https://david-gilbertson.medium.com/part-2-how-to-stop-me-harvesting-credit-card-numbers-and-passwords-from-your-site-844f739659b9][How to stop me harvesting credit card numbers and passwords from your site]]
+  - unless audited? [[https://paulmillr.com/noble/][Noble cryptography]]
 - Target 14kB for initial page load
   - [[https://endtimes.dev/why-your-website-should-be-under-14kb-in-size/][Why your website should be under 14kB in size]]
 - LibreJS
   - [[https://www.gnu.org/software/librejs/free-your-javascript.html][Setting Your JavaScript Free]]
-- JSDoc instead of TypeScript
-  - [[https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html][JSDoc Reference]]
-  - [[https://tsdoc.org][TSDoc]]
 - Linting
+- Testing
 - Formatting
 - Verifiable deploy
 - Print styles

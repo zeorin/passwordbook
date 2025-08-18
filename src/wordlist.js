@@ -1,6 +1,10 @@
 const newline = /\r?\n/gu;
 
-const readLine = async function* (reader: ReadableStreamDefaultReader<string>) {
+/**
+ * @param {ReadableStreamDefaultReader<string>} reader
+ * @returns {AsyncGenerator<string, void, unknown>}
+ */
+const readLine = async function* (reader) {
 	let { value: chunk = "", done: readerDone } = await reader.read();
 
 	let startIndex = 0;
@@ -25,9 +29,12 @@ const readLine = async function* (reader: ReadableStreamDefaultReader<string>) {
 	}
 };
 
-export type Wordlist = Map<number, string>;
+/** @typedef {Map<number, string>} Wordlist */
 
-export const loadWordlist = async (): Promise<Wordlist> => {
+/**
+ * @returns {Promise<Wordlist>}
+ */
+export const loadWordlist = async () => {
 	const response = await fetch("/eff_large_wordlist.txt");
 
 	if (!response.ok) {
@@ -38,7 +45,8 @@ export const loadWordlist = async (): Promise<Wordlist> => {
 		throw new Error("No response");
 	}
 
-	const wordlist = new Map<number, string>();
+	/** @type {Wordlist} */
+	const wordlist = new Map();
 
 	for await (const line of readLine(
 		response.body.pipeThrough(new TextDecoderStream()).getReader(),
