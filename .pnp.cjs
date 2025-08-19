@@ -28,6 +28,7 @@ const RAW_RUNTIME_STATE =
       [null, {\
         "packageLocation": "./",\
         "packageDependencies": [\
+          ["@scure/bip39", "npm:1.6.0"],\
           ["@types/isaac", "npm:0.0.3"],\
           ["isaac", "npm:0.0.5"],\
           ["passwordbook", "workspace:."],\
@@ -306,6 +307,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["@noble/hashes", [\
+      ["npm:1.8.0", {\
+        "packageLocation": "./.yarn/cache/@noble-hashes-npm-1.8.0-a397449e64-06a0b52c81.zip/node_modules/@noble/hashes/",\
+        "packageDependencies": [\
+          ["@noble/hashes", "npm:1.8.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["@npmcli/agent", [\
       ["npm:3.0.0", {\
         "packageLocation": "./.yarn/cache/@npmcli-agent-npm-3.0.0-169e79294f-efe37b982f.zip/node_modules/@npmcli/agent/",\
@@ -515,6 +525,26 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/unplugged/@rollup-rollup-win32-x64-msvc-npm-4.46.2-66021925a7/node_modules/@rollup/rollup-win32-x64-msvc/",\
         "packageDependencies": [\
           ["@rollup/rollup-win32-x64-msvc", "npm:4.46.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@scure/base", [\
+      ["npm:1.2.6", {\
+        "packageLocation": "./.yarn/cache/@scure-base-npm-1.2.6-f26c4d7404-49bd529337.zip/node_modules/@scure/base/",\
+        "packageDependencies": [\
+          ["@scure/base", "npm:1.2.6"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@scure/bip39", [\
+      ["npm:1.6.0", {\
+        "packageLocation": "./.yarn/cache/@scure-bip39-npm-1.6.0-63a27ac0b7-73a54b5566.zip/node_modules/@scure/bip39/",\
+        "packageDependencies": [\
+          ["@noble/hashes", "npm:1.8.0"],\
+          ["@scure/base", "npm:1.2.6"],\
+          ["@scure/bip39", "npm:1.6.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -1175,6 +1205,7 @@ const RAW_RUNTIME_STATE =
       ["workspace:.", {\
         "packageLocation": "./",\
         "packageDependencies": [\
+          ["@scure/bip39", "npm:1.6.0"],\
           ["@types/isaac", "npm:0.0.3"],\
           ["isaac", "npm:0.0.5"],\
           ["passwordbook", "workspace:."],\

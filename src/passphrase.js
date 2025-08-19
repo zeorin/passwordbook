@@ -1,37 +1,39 @@
 import isaac from "isaac";
 
 import { capitalize } from "./capitalize.js";
-import { getBits } from "./bits.js";
-import { getDice } from "./roll.js";
-
-/** @import {Wordlist} from "./wordlist.js" */
-
-/**
- * @param {Object} options
- * @param {Wordlist} options.wordlist
- * @param {() => number} options.roll
- */
-export const getPassphraseGenerator =
-	({ wordlist, roll }) =>
-	/**
-	 * @param {number} [words=6]
-	 * @returns {string}
-	 */
-	(words = 6) =>
-		Array.from({ length: words }, () =>
-			capitalize(wordlist.get(roll()) ?? ""),
-		).join("");
+import { invariant } from "./invariant.js";
+import { getBits, validate as validateSeed } from "./seed.js";
+import { loadWordlist } from "./wordlist.js";
 
 /**
  * @param {Object} options
- * @param {Wordlist} options.wordlist
+ * @param {string} [options.language="en"]
  * @param {string} options.seed
+ * @param {number} [options.count=100]
+ * @param {number} [options.length=6]
  * @returns {Promise<string[]>}
  */
-export const generatePassphrases = async ({ wordlist, seed }) => {
-	const seedBits = await getBits(seed);
-	isaac.seed(Array.from(new Uint32Array(seedBits)));
-	const roll = getDice(() => isaac.random());
-	const generatePassphrase = getPassphraseGenerator({ wordlist, roll });
-	return Array.from({ length: 100 }, () => generatePassphrase());
+export const generatePassphrases = async ({
+	language = "en",
+	seed,
+	count = 100,
+	length = 6,
+}) => {
+	const [words, isValidSeed] = await Promise.all([
+		loadWordlist(language),
+		validateSeed(seed, language),
+	]);
+
+	invariant(isValidSeed, "Invalid seed phrase!");
+
+	isaac.seed(Array.from(new Uint32Array(await getBits(seed))));
+
+	return Array.from({ length: count }, () =>
+		Array.from(
+			{ length },
+			() => words[Math.floor(isaac.random() * words.length)],
+		)
+			.map(capitalize)
+			.join(""),
+	);
 };

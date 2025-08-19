@@ -29,13 +29,16 @@ const readLine = async function* (reader) {
 	}
 };
 
-/** @typedef {Map<number, string>} Wordlist */
-
 /**
- * @returns {Promise<Wordlist>}
+ * @param {string} [language="en"]
+ * @returns {Promise<string[]>}
  */
-export const loadWordlist = async () => {
-	const response = await fetch("/eff_large_wordlist.txt");
+export const loadWordlist = async (language = "en") => {
+	const response = await fetch(
+		{
+			en: "/eff_large_wordlist.txt",
+		}[language] ?? "/eff_large_wordlist.txt",
+	);
 
 	if (!response.ok) {
 		throw new Error(`${response.status}: ${response.statusText}`);
@@ -45,15 +48,15 @@ export const loadWordlist = async () => {
 		throw new Error("No response");
 	}
 
-	/** @type {Wordlist} */
-	const wordlist = new Map();
+	/** @type {string[]} */
+	const wordlist = [];
 
 	for await (const line of readLine(
 		response.body.pipeThrough(new TextDecoderStream()).getReader(),
 	)) {
-		const [number, word] = line.split("\t");
+		const [, word] = line.split("\t");
 
-		wordlist.set(parseInt(number, 10), word);
+		wordlist.push(word);
 	}
 
 	return wordlist;

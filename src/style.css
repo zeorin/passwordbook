@@ -78,35 +78,17 @@ button:focus-visible {
 	outline: 0.25rem auto -webkit-focus-ring-color;
 }
 
-.generate {
+.generate,
+.regenerate,
+.seed {
 	display: block;
 	margin: 2rem auto;
 }
 
-.regenerateWrapper {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin: 2rem 0;
-}
-
-.seed {
-	width: max-content;
-	flex: 0 0 max-content;
-	margin-left: 0.25rem;
-	margin-right: 1rem;
-}
-.seed:not(:empty) {
-	user-select: all;
-}
-.seed.focused {
-	user-select: initial;
-}
-
-.regenerateWrapper label,
 .seed {
 	font-size: 1.45rem;
 	font-weight: 600;
+	max-width: 40rem;
 }
 
 .regenerate {
