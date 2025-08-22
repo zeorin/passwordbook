@@ -66,12 +66,21 @@ const onSet = (prop) => {
 
 /**
  * @typedef {Object} State
+ * @property {boolean} isGeneratingSeed
+ * @property {boolean} isGeneratingPassphrases
+ * @property {string=} generatedSeed
  * @property {string=} seed
  * @property {string[]=} passphrases
  */
 
 /** @type {State} */
-const stateTarget = {};
+const stateTarget = {
+	isGeneratingSeed: false,
+	isGeneratingPassphrases: false,
+	generatedSeed: undefined,
+	seed: undefined,
+	passphrases: undefined,
+};
 
 /** @type {State} */
 export const state = new Proxy(stateTarget, {

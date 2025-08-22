@@ -28,12 +28,14 @@ export const generatePassphrases = async ({
 
 	isaac.seed(Array.from(new Uint32Array(await getBits(seed))));
 
-	return Array.from({ length: count }, () =>
-		Array.from(
-			{ length },
-			() => words[Math.floor(isaac.random() * words.length)],
-		)
-			.map(capitalize)
-			.join(""),
+	return Array.from(
+		{ length: count },
+		() =>
+			Array.from(
+				{ length },
+				() => words[Math.floor(isaac.random() * words.length)],
+			)
+				.map(capitalize)
+				.join("​"), // Zero Width Space 0x200B
 	);
 };

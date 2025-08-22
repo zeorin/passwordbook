@@ -1,3 +1,19 @@
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+* {
+	margin: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	html {
+		interpolate-size: allow-keywords;
+	}
+}
+
 :root {
 	font-family:
 		-apple-system,
@@ -23,46 +39,38 @@
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-}
 
-a {
-	font-weight: 500;
-	color: #646cff;
-	text-decoration: inherit;
-}
-a:hover {
-	color: #535bf2;
+	--border-radius: 0.5rem;
 }
 
 body {
-	margin: 0;
 	min-height: 100vh;
 }
 
-header {
-	text-align: center;
-	margin-bottom: 2rem;
+input,
+button,
+textarea,
+select {
+	font: inherit;
 }
 
-.subtitle {
-	font-style: italic;
+p {
+	text-wrap: pretty;
 }
 
-h1 {
-	font-size: 3.2rem;
-	line-height: 1.1;
-}
-
-.card {
-	padding: 2rem;
-	display: flex;
-	justify-content: center;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	text-wrap: balance;
 }
 
 button {
-	border-radius: 0.5rem;
+	border-radius: var(--border-radius);
 	border: 1px solid transparent;
-	padding: 0.6rem 1.2rem;
+	padding: 0.6em 1.2em;
 	font-size: 1rem;
 	font-weight: 500;
 	font-family: inherit;
@@ -75,44 +83,7 @@ button:hover {
 }
 button:focus,
 button:focus-visible {
-	outline: 0.25rem auto -webkit-focus-ring-color;
-}
-
-.generate,
-.regenerate,
-.seed {
-	display: block;
-	margin: 2rem auto;
-}
-
-.seed {
-	font-size: 1.45rem;
-	font-weight: 600;
-	max-width: 40rem;
-}
-
-.regenerate {
-	display: block;
-}
-
-.passphrases {
-	list-style: none;
-	padding-inline-start: 0;
-	width: min-content;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-.passphrases li {
-	margin-top: 0.25rem;
-	margin-bottom: 0.25rem;
-}
-
-.loader {
-	font-size: 3.75rem;
-	font-weight: 700;
-	text-align: center;
-	margin: 4rem 0;
+	outline: 0.25em auto -webkit-focus-ring-color;
 }
 
 .hidden {
@@ -129,5 +100,175 @@ button:focus-visible {
 	}
 	button {
 		background-color: #f9f9f9;
+	}
+}
+
+.header {
+	text-align: center;
+	margin-bottom: 2rem;
+}
+
+.header .title {
+	font-size: 3.2rem;
+	line-height: 1.1;
+	margin: 2rem 0;
+	cursor: default;
+}
+
+.header .subtitle {
+	font-style: italic;
+	margin: 2rem 0;
+	cursor: default;
+}
+
+.noscript {
+	width: calc(100% - 2rem);
+	max-width: min(calc(100% - 2rem), 40rem);
+	margin: 2rem auto;
+}
+
+.no-js .main {
+	display: none;
+}
+
+.main {
+	width: calc(100% - 2rem);
+	max-width: min(calc(100% - 2rem), 48rem);
+	margin: 2rem auto;
+}
+
+.loader {
+	font-size: 1.45rem;
+	font-weight: 600;
+	text-align: center;
+	margin: 4rem auto 2rem;
+}
+
+.generator {
+	width: 100%;
+	margin-bottom: 2rem;
+	font-size: 1.45rem;
+}
+
+.print {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 1rem;
+}
+
+.generator .label {
+	display: block;
+	font-weight: 600;
+	margin-bottom: 0.5rem;
+}
+
+.generator .seed {
+	margin: 0;
+	padding: 0.5rem;
+	border: 2px dotted currentColor;
+	border-radius: var(--border-radius);
+}
+.generator .seed:hover {
+	border-color: AccentColor;
+}
+.generator .seed:focus,
+.generator .seed:focus-visible {
+	outline: none;
+	border-color: -webkit-focus-ring-color;
+	border-color: AccentColor;
+}
+
+.passphrases {
+	display: grid;
+	grid-template-columns: min-content 1fr;
+}
+
+.passphrases {
+	display: grid;
+	grid-template-columns: min-content 1fr;
+}
+
+.passphrases .section {
+	display: grid;
+	grid-template-columns: subgrid;
+	grid-column-end: span 2;
+}
+
+.passphrases .letter {
+	grid-column-end: span 2;
+	font-size: 5rem;
+	margin-top: 2rem;
+}
+.passphrases .letter:first-of-type {
+	margin-top: 0;
+}
+
+.passphrase {
+	display: grid;
+	grid-template-columns: subgrid;
+	grid-column-end: span 2;
+	font-size: 1.125rem;
+	margin: 0.5rem auto;
+	border: 1px solid currentColor;
+	border-radius: var(--border-radius);
+
+	--inside-padding: 0.5rem;
+}
+
+.passphrase tbody,
+.passphrase tr {
+	display: inherit;
+	grid-template-columns: inherit;
+	grid-column-end: inherit;
+}
+
+.passphrase tr {
+	border-bottom: 1px dotted currentColor;
+}
+
+.passphrase tr:last-child {
+	border-bottom: none;
+}
+
+.passphrase th,
+.passphrase td {
+	display: block;
+	padding: 0.25em;
+}
+
+.passphrase .title {
+	grid-column-end: span 2;
+}
+
+.passphrase tr:first-child > * {
+	font-size: 1.5rem;
+}
+.passphrase tr > :first-child {
+	padding-left: var(--inside-padding);
+}
+.passphrase tr > :first-child {
+	padding-right: var(--inside-padding);
+}
+
+.passphrase .label {
+	text-align: right;
+	white-space: pre;
+	cursor: default;
+	user-select: none;
+}
+
+.passphrase .spacer {
+	cursor: default;
+	user-select: none;
+}
+
+@media print {
+	.subtitle {
+		display: none;
+	}
+
+	.print {
+		display: none;
 	}
 }

@@ -3,8 +3,12 @@ import morphdom from "morphdom";
 import { html } from "./html.js";
 import { invariant } from "./invariant.js";
 import { generatePassphrases } from "./passphrase.js";
-import { generate as generateSeedPhrase } from "./seed.js";
+import {
+	generate as generateSeedPhrase,
+	validate as validateSeed,
+} from "./seed.js";
 import { createEffect, state } from "./state.js";
+import { App } from "./components/app.js";
 
 const container = document.getElementById("app");
 invariant(container instanceof HTMLElement, "Could not find app container!");
@@ -16,23 +20,23 @@ invariant(container instanceof HTMLElement, "Could not find app container!");
  * @param {number} [options.length=6]
  */
 const generate = async ({ language = "en", count = 100, length = 6 } = {}) => {
-	if (Object.keys(state).length > 0) {
-		state.seed = undefined;
-		state.passphrases = undefined;
-	}
+	state.isGeneratingSeed = true;
+	state.isGeneratingPassphrases = true;
 
 	const seed = await generateSeedPhrase(language);
 
 	state.seed = seed;
+	state.generatedSeed = seed;
+	state.isGeneratingSeed = false;
 
-	const passphrases = await generatePassphrases({
+	state.passphrases = await generatePassphrases({
 		language,
 		seed,
 		count,
 		length,
 	});
 
-	state.passphrases = passphrases;
+	state.isGeneratingPassphrases = false;
 };
 
 /**
@@ -46,12 +50,13 @@ const regenerate = async ({
 	count = 100,
 	length = 6,
 } = {}) => {
-	const { seed } = state;
+	const { seed, generatedSeed } = state;
 
-	if (seed == null) {
+	if (seed == null || seed === generatedSeed || !validateSeed(seed)) {
 		return;
 	}
 
+	state.isGeneratingPassphrases = true;
 	state.passphrases = undefined;
 
 	state.passphrases = await generatePassphrases({
@@ -60,6 +65,7 @@ const regenerate = async ({
 		count,
 		length,
 	});
+	state.isGeneratingPassphrases = false;
 };
 
 const render = () => {
@@ -68,28 +74,7 @@ const render = () => {
 		[""]
 			.concat(html`
 				<div>
-					<form id="generator" class="generator" action="#">
-						<button id="generate" class="generate" type="button">
-							Generate
-						</button>
-						<button id="regenerate" class="regenerate" type="button">
-							Regenerate
-						</button>
-						<p
-							id="seed"
-							class="seed"
-							autocomplete="off"
-							spellcheck="false"
-							contenteditable="plaintext-only"
-						>
-							${state.seed ?? ""}
-						</p>
-					</form>
-					<ul id="passphrases" class="passphrases">
-						${state.passphrases?.map(
-							(passphrase) => html`<li>${passphrase}</li>`,
-						) ?? ""}
-					</ul>
+					<${App} ...${state} />
 				</div>
 			`)
 			.join(""),
@@ -105,14 +90,31 @@ container.addEventListener("click", (event) => {
 		return;
 	}
 
-	if (event.target.id === "generate") {
-		generate();
+	if (event.target.id === "print") {
+		window.print();
+	}
+});
+
+container.addEventListener("input", (event) => {
+	if (!(event.target instanceof HTMLElement)) {
 		return;
 	}
 
-	if (event.target.id === "regenerate") {
+	if (event.target.id === "seed") {
+		state.seed = event.target.textContent ?? undefined;
 		regenerate();
-		return;
+	}
+});
+
+// Strip zero-width spaces on copy
+document.addEventListener("copy", (event) => {
+	const selection = window.getSelection();
+	if (selection && event.clipboardData) {
+		event.clipboardData.setData(
+			"text/plain",
+			selection?.toString().replaceAll("​", ""),
+		);
+		event.preventDefault();
 	}
 });
 
