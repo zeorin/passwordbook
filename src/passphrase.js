@@ -6,6 +6,16 @@ import { getBits, validate as validateSeed } from "./seed.js";
 import { loadWordlist } from "./wordlist.js";
 
 /**
+ * @param {string[]} words
+ */
+const randomWord = (words) => words[Math.floor(isaac.random() * words.length)];
+const randomDigit = () => Math.floor(isaac.random() * 9) + 1;
+
+const SYMBOLS = "!#$%&*?@^_~";
+
+const randomSymbol = () => SYMBOLS[Math.floor(isaac.random() * SYMBOLS.length)];
+
+/**
  * @param {Object} options
  * @param {string} [options.language="en"]
  * @param {string} options.seed
@@ -31,10 +41,9 @@ export const generatePassphrases = async ({
 	return Array.from(
 		{ length: count },
 		() =>
-			Array.from(
-				{ length },
-				() => words[Math.floor(isaac.random() * words.length)],
-			)
+			randomDigit() +
+			randomSymbol() +
+			Array.from({ length }, () => randomWord(words))
 				.map(capitalize)
 				.join("​"), // Zero Width Space 0x200B
 	);
