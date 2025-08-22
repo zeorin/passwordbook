@@ -18,46 +18,23 @@ invariant(container instanceof HTMLElement, "Could not find app container!");
  * @param {string} [options.language="en"]
  * @param {number} [options.count=100]
  * @param {number} [options.length=6]
+ * @param {string=} options.seed
  */
-const generate = async ({ language = "en", count = 100, length = 6 } = {}) => {
-	state.isGeneratingSeed = true;
-	state.isGeneratingPassphrases = true;
-
-	const seed = await generateSeedPhrase(language);
-
-	state.seed = seed;
-	state.generatedSeed = seed;
-	state.isGeneratingSeed = false;
-
-	state.passphrases = await generatePassphrases({
-		language,
-		seed,
-		count,
-		length,
-	});
-
-	state.isGeneratingPassphrases = false;
-};
-
-/**
- * @param {object} [options={}]
- * @param {string} [options.language="en"]
- * @param {number} [options.count=100]
- * @param {number} [options.length=6]
- */
-const regenerate = async ({
+const generate = async ({
 	language = "en",
 	count = 100,
 	length = 6,
+	seed,
 } = {}) => {
-	const { seed, generatedSeed } = state;
-
-	if (seed == null || seed === generatedSeed || !validateSeed(seed)) {
-		return;
-	}
-
 	state.isGeneratingPassphrases = true;
-	state.passphrases = undefined;
+
+	if (!seed) {
+		state.isGeneratingSeed = true;
+		seed = await generateSeedPhrase(language);
+		state.generatedSeed = seed;
+		state.seed = seed;
+		state.isGeneratingSeed = false;
+	}
 
 	state.passphrases = await generatePassphrases({
 		language,
@@ -65,6 +42,7 @@ const regenerate = async ({
 		count,
 		length,
 	});
+
 	state.isGeneratingPassphrases = false;
 };
 
@@ -95,14 +73,18 @@ container.addEventListener("click", (event) => {
 	}
 });
 
-container.addEventListener("input", (event) => {
+container.addEventListener("input", async (event) => {
 	if (!(event.target instanceof HTMLElement)) {
 		return;
 	}
 
 	if (event.target.id === "seed") {
-		state.seed = event.target.textContent ?? undefined;
-		regenerate();
+		const seed = event.target.textContent ?? undefined;
+		state.seed = seed;
+		if (seed && seed !== state.generatedSeed && (await validateSeed(seed))) {
+			generate({ seed });
+		}
+		return;
 	}
 });
 
