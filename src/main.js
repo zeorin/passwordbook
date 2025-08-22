@@ -16,13 +16,13 @@ invariant(container instanceof HTMLElement, "Could not find app container!");
 /**
  * @param {object} [options={}]
  * @param {string} [options.language="en"]
- * @param {number} [options.count=100]
+ * @param {number} [options.count=256]
  * @param {number} [options.length=6]
  * @param {string=} options.seed
  */
 const generate = async ({
 	language = "en",
-	count = 100,
+	count = 256,
 	length = 6,
 	seed,
 } = {}) => {
