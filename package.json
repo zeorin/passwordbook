@@ -11,12 +11,16 @@
   },
   "devDependencies": {
     "@types/isaac": "^0",
+    "@types/vhtml": "^2.2.9",
     "prettier": "^3.6.2",
     "typescript": "~5.8.3",
     "vite": "^7.1.2"
   },
   "dependencies": {
     "@scure/bip39": "^1.6.0",
-    "isaac": "^0.0.5"
+    "htm": "^3.1.1",
+    "isaac": "^0.0.5",
+    "morphdom": "^2.7.7",
+    "vhtml": "^2.2.0"
   }
 }

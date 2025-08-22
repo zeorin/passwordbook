@@ -1,42 +1,13 @@
+import morphdom from "morphdom";
+
+import { html } from "./html.js";
 import { invariant } from "./invariant.js";
 import { generatePassphrases } from "./passphrase.js";
 import { generate as generateSeedPhrase } from "./seed.js";
+import { createEffect, state } from "./state.js";
 
-const loader = document.querySelector("#loader");
-invariant(loader && loader instanceof HTMLDivElement);
-
-const generator = document.querySelector("#generator");
-invariant(generator && generator instanceof HTMLFormElement);
-generator.addEventListener("submit", (event) => {
-	event.preventDefault();
-});
-
-const generateButton = document.querySelector("#generate");
-invariant(generateButton && generateButton instanceof HTMLButtonElement);
-
-const seedInput = document.querySelector("#seed");
-invariant(seedInput && seedInput instanceof HTMLParagraphElement);
-seedInput.addEventListener("focus", () => {
-	queueMicrotask(() => {
-		seedInput.classList.add("focused");
-	});
-});
-seedInput.addEventListener("blur", () => {
-	seedInput.classList.remove("focused");
-});
-
-const regenerateButton = document.querySelector("#regenerate");
-invariant(regenerateButton && regenerateButton instanceof HTMLButtonElement);
-
-const passphraseList = document.querySelector("#passphrases");
-invariant(passphraseList && passphraseList instanceof HTMLUListElement);
-
-/** @param {string[]} passphrases */
-const renderPassphrases = (passphrases) => {
-	passphraseList.innerHTML = passphrases
-		.map((passphrase) => `<li>${passphrase}</li>`)
-		.join("");
-};
+const container = document.getElementById("app");
+invariant(container instanceof HTMLElement, "Could not find app container!");
 
 /**
  * @param {object} [options={}]
@@ -45,20 +16,23 @@ const renderPassphrases = (passphrases) => {
  * @param {number} [options.length=6]
  */
 const generate = async ({ language = "en", count = 100, length = 6 } = {}) => {
-	seedInput.innerText = "";
-	renderPassphrases([]);
+	if (Object.keys(state).length > 0) {
+		state.seed = undefined;
+		state.passphrases = undefined;
+	}
 
 	const seed = await generateSeedPhrase(language);
-	seedInput.innerText = seed;
 
-	renderPassphrases(
-		await generatePassphrases({
-			language,
-			seed,
-			count,
-			length,
-		}),
-	);
+	state.seed = seed;
+
+	const passphrases = await generatePassphrases({
+		language,
+		seed,
+		count,
+		length,
+	});
+
+	state.passphrases = passphrases;
 };
 
 /**
@@ -72,27 +46,78 @@ const regenerate = async ({
 	count = 100,
 	length = 6,
 } = {}) => {
-	const seed = seedInput.innerText;
+	const { seed } = state;
 
-	renderPassphrases([]);
+	if (seed == null) {
+		return;
+	}
 
-	renderPassphrases(
-		await generatePassphrases({
-			language,
-			seed,
-			count,
-			length,
-		}),
+	state.passphrases = undefined;
+
+	state.passphrases = await generatePassphrases({
+		language,
+		seed,
+		count,
+		length,
+	});
+};
+
+const render = () => {
+	morphdom(
+		container,
+		[""]
+			.concat(html`
+				<div>
+					<form id="generator" class="generator" action="#">
+						<button id="generate" class="generate" type="button">
+							Generate
+						</button>
+						<button id="regenerate" class="regenerate" type="button">
+							Regenerate
+						</button>
+						<p
+							id="seed"
+							class="seed"
+							autocomplete="off"
+							spellcheck="false"
+							contenteditable="plaintext-only"
+						>
+							${state.seed ?? ""}
+						</p>
+					</form>
+					<ul id="passphrases" class="passphrases">
+						${state.passphrases?.map(
+							(passphrase) => html`<li>${passphrase}</li>`,
+						) ?? ""}
+					</ul>
+				</div>
+			`)
+			.join(""),
+		{
+			childrenOnly: true,
+			onBeforeElUpdated: (fromEl, toEl) => !fromEl.isEqualNode(toEl),
+		},
 	);
 };
 
-await generate();
+container.addEventListener("click", (event) => {
+	if (!(event.target instanceof HTMLButtonElement)) {
+		return;
+	}
 
-generateButton.addEventListener("click", () => generate());
-generateButton.innerHTML = "Generate";
+	if (event.target.id === "generate") {
+		generate();
+		return;
+	}
 
-regenerateButton.addEventListener("click", () => regenerate());
-regenerateButton.innerHTML = "Regenerate";
+	if (event.target.id === "regenerate") {
+		regenerate();
+		return;
+	}
+});
 
-generator.classList.remove("hidden");
-loader.classList.add("hidden");
+createEffect(() => {
+	render();
+});
+
+generate();

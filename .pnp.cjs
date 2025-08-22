@@ -30,10 +30,14 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@scure/bip39", "npm:1.6.0"],\
           ["@types/isaac", "npm:0.0.3"],\
+          ["@types/vhtml", "npm:2.2.9"],\
+          ["htm", "npm:3.1.1"],\
           ["isaac", "npm:0.0.5"],\
+          ["morphdom", "npm:2.7.7"],\
           ["passwordbook", "workspace:."],\
           ["prettier", "npm:3.6.2"],\
           ["typescript", "patch:typescript@npm%3A5.8.3#optional!builtin<compat/typescript>::version=5.8.3&hash=5786d5"],\
+          ["vhtml", "npm:2.2.0"],\
           ["vite", "virtual:700539ed96801a2f5bc04563dcc1de57bf210c777761a7187db83c7ad476111e5b8cd2aef6d724742caaa19550ffe4bbd02fcfcdde164446e20f4679fa22e82b#npm:7.1.2"]\
         ],\
         "linkType": "SOFT"\
@@ -567,6 +571,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["@types/vhtml", [\
+      ["npm:2.2.9", {\
+        "packageLocation": "./.yarn/cache/@types-vhtml-npm-2.2.9-7bd2a5d88e-0cf47ab6e7.zip/node_modules/@types/vhtml/",\
+        "packageDependencies": [\
+          ["@types/vhtml", "npm:2.2.9"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["abbrev", [\
       ["npm:3.0.1", {\
         "packageLocation": "./.yarn/cache/abbrev-npm-3.0.1-a34d600e50-21ba8f574e.zip/node_modules/abbrev/",\
@@ -895,6 +908,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["htm", [\
+      ["npm:3.1.1", {\
+        "packageLocation": "./.yarn/cache/htm-npm-3.1.1-e3b831f850-0de4c8fff2.zip/node_modules/htm/",\
+        "packageDependencies": [\
+          ["htm", "npm:3.1.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["http-cache-semantics", [\
       ["npm:4.2.0", {\
         "packageLocation": "./.yarn/cache/http-cache-semantics-npm-4.2.0-fadacfb3ad-45b66a945c.zip/node_modules/http-cache-semantics/",\
@@ -1127,6 +1149,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["morphdom", [\
+      ["npm:2.7.7", {\
+        "packageLocation": "./.yarn/cache/morphdom-npm-2.7.7-4bc272d2e7-cf6c2d6d94.zip/node_modules/morphdom/",\
+        "packageDependencies": [\
+          ["morphdom", "npm:2.7.7"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["ms", [\
       ["npm:2.1.3", {\
         "packageLocation": "./.yarn/cache/ms-npm-2.1.3-81ff3cfac1-d924b57e73.zip/node_modules/ms/",\
@@ -1207,10 +1238,14 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@scure/bip39", "npm:1.6.0"],\
           ["@types/isaac", "npm:0.0.3"],\
+          ["@types/vhtml", "npm:2.2.9"],\
+          ["htm", "npm:3.1.1"],\
           ["isaac", "npm:0.0.5"],\
+          ["morphdom", "npm:2.7.7"],\
           ["passwordbook", "workspace:."],\
           ["prettier", "npm:3.6.2"],\
           ["typescript", "patch:typescript@npm%3A5.8.3#optional!builtin<compat/typescript>::version=5.8.3&hash=5786d5"],\
+          ["vhtml", "npm:2.2.0"],\
           ["vite", "virtual:700539ed96801a2f5bc04563dcc1de57bf210c777761a7187db83c7ad476111e5b8cd2aef6d724742caaa19550ffe4bbd02fcfcdde164446e20f4679fa22e82b#npm:7.1.2"]\
         ],\
         "linkType": "SOFT"\
@@ -1523,6 +1558,15 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["imurmurhash", "npm:0.1.4"],\
           ["unique-slug", "npm:5.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["vhtml", [\
+      ["npm:2.2.0", {\
+        "packageLocation": "./.yarn/cache/vhtml-npm-2.2.0-0eb0c0a994-27caed4e3b.zip/node_modules/vhtml/",\
+        "packageDependencies": [\
+          ["vhtml", "npm:2.2.0"]\
         ],\
         "linkType": "HARD"\
       }]\
