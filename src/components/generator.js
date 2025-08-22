@@ -19,7 +19,7 @@ export const Generator = ({ seed }) => html`
 			autocomplete="off"
 			inputmode="text"
 		>
-			${seed}
+			${seed ? `v1 ${seed}` : ""}
 		</p>
 	</form>
 `;

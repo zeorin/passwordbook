@@ -79,7 +79,7 @@ container.addEventListener("input", async (event) => {
 	}
 
 	if (event.target.id === "seed") {
-		const seed = event.target.textContent ?? undefined;
+		const seed = event.target.textContent?.replace("v1 ", "");
 		state.seed = seed;
 		if (seed && seed !== state.generatedSeed && (await validateSeed(seed))) {
 			generate({ seed });
