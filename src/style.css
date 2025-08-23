@@ -209,7 +209,7 @@ button:focus-visible {
 	grid-template-columns: subgrid;
 	grid-column-end: span 2;
 	font-size: 1.125rem;
-	margin: 0.5rem auto;
+	margin: 0.5rem 0;
 	border: 1px solid currentColor;
 	border-radius: var(--border-radius);
 
