@@ -25,3 +25,19 @@ TODO:
 - Split passwords into sections, specifically, letters of the alphabet
   - Use language-specific character frequencies (at the start of words) to
     decide the quantity of passwords for a specific letter's section.
+- Implement feedback from users:
+  - un-biased random number transformation: https://www.pcg-random.org/posts/bounded-rands.html
+  - consider more renowned CSPRNGs, such as ChaCha20
+    - https://www.zellic.io/blog/csprngs-how-to-properly-generate-random-numbers/#csprng-constructions
+    - https://sortingsearching.com/2023/11/25/random.html
+    - https://cryptobook.nakov.com/secure-random-generators/secure-random-generators-csprng
+  - explain how/why these passwords are secure
+  - answer their questions:
+    - why does each password start with a number?
+    - what is the exact function of a letter [the section headers]?
+    - what's the seed phrase for?
+    - how to recover using the seed phrase?
+    - what makes the seed phrase valid?
+    - why did you make it ("This for fun? For GitHub? Or to Monetise")?
+    - maybe just add an explainer paragraph at the top?
+    - how is the book itself protected?
