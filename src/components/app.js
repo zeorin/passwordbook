@@ -1,10 +1,10 @@
-import { html } from "../html";
+import { html } from "../lib/html.js";
 
 import { Loader } from "./loader.js";
 import { Generator } from "./generator.js";
 import { Passphrases } from "./passphrases.js";
 
-/** @import {State} from "../state.js" */
+/** @import {State} from "../lib/state.js" */
 
 /**
  * @param {State} props

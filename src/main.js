@@ -1,13 +1,13 @@
 import morphdom from "morphdom";
 
-import { html } from "./html.js";
-import { invariant } from "./invariant.js";
-import { generatePassphrases } from "./passphrase.js";
+import { html } from "./lib/html.js";
+import { invariant } from "./lib/invariant.js";
+import { generatePassphrases } from "./lib/passphrase.js";
 import {
 	generate as generateSeedPhrase,
 	validate as validateSeed,
-} from "./seed.js";
-import { createEffect, state } from "./state.js";
+} from "./lib/seed.js";
+import { createEffect, state } from "./lib/state.js";
 import { App } from "./components/app.js";
 
 const container = document.getElementById("app");

@@ -1,4 +1,4 @@
-import { html } from "../html";
+import { html } from "../lib/html";
 
 /**
  * @param {number} length
