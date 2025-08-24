@@ -56,17 +56,33 @@ export const Passphrases = ({ passphrases }) =>
 	passphrases == null || passphrases.length === 0
 		? ""
 		: html`
-				<div class="passphrases">
+				<div class="passphrases" style="--sections: ${alphabet.length};">
 					${group(alphabet, passphrases).map(
 						([letter, passphrases]) => html`
-							<section class="section">
-								<h2 class="letter">${letter}</h2>
-								${passphrases.map(
-									(passphrase) => html`
-										<div class="separator" />
-										<${Passphrase} passphrase=${passphrase} />
-									`,
-								)}
+							<section class="section" style="--passphrases: ${passphrases.length};">
+								<div class="left-margin"></div>
+  							<div class="content">
+									<h2 class="heading letter">${letter}</h2>
+									${passphrases.map(
+										(passphrase) => html`
+											<div class="gap"></div>
+											<${Passphrase} passphrase=${passphrase} />
+										`,
+									)}
+									<aside class="notes">
+										<h3 class="heading">Notes</h2>
+										<div class="gap"></div>
+										<div class="lines">
+											${passphrases.flatMap(() =>
+												Array.from(
+													{ length: 6 },
+													() => html`<div class="line"></div>`,
+												),
+											)}
+										</div>
+									</aside>
+  							</div>
+								<div class="right-margin"></div>
 							</section>
 						`,
 					)}

@@ -132,9 +132,7 @@ button:focus-visible {
 }
 
 .main {
-	width: calc(100% - 2rem);
-	max-width: min(calc(100% - 2rem), 48rem);
-	margin: auto;
+	--content-width: 60rem;
 	margin-top: 2rem;
 	margin-bottom: 1rem;
 }
@@ -147,7 +145,9 @@ button:focus-visible {
 }
 
 .generator {
-	width: 100%;
+	width: calc(100% - 2rem);
+	max-width: min(calc(100% - 2rem), var(--content-width));
+	margin: 0 auto;
 	margin-bottom: 2rem;
 	font-size: 1.45rem;
 }
@@ -182,46 +182,91 @@ button:focus-visible {
 }
 
 .passphrases {
+	--gap: 2rem;
 	display: grid;
-	grid-template-columns: min-content 1fr;
+	grid-template-columns:
+		[left-margin-start] auto [left-margin-end content-start]
+		min(calc(100% - 2rem), var(--content-width))
+		[content-end right-margin-start] auto [right-margin-end];
+}
+@media screen and (width >= 32rem) {
+	.passphrases {
+		--gap: 1.5rem;
+	}
+}
+@media screen and (width >= 40rem) {
+	.passphrases {
+		--gap: 1rem;
+	}
+}
+@media screen and not (width >= 40rem) {
+	.notes {
+		display: none !important;
+	}
 }
 
 .passphrases .section {
 	display: grid;
 	grid-template-columns: subgrid;
-	grid-template-rows: auto;
-	grid-auto-rows: 2rem 1.5fr 1fr 1fr 1fr;
+	grid-template-rows:
+		[section-start] auto repeat(
+			var(--passphrases),
+			var(--gap) 1.5fr 1fr 1fr 1fr
+		)
+		[section-end];
 	grid-column: 1 / -1;
-}
-@media screen and (width >= 32rem) {
-	.passphrases .section {
-		grid-auto-rows: 1rem 1.5fr 1fr 1fr 1fr;
-	}
-}
-@media screen and (width >= 40rem) {
-	.passphrases .section {
-		grid-auto-rows: 0.5rem 1.5fr 1fr 1fr 1fr;
-	}
-}
-
-.passphrases .section .letter {
-	grid-column: inherit;
-	font-size: 5rem;
 	margin-top: 2rem;
 }
-.passphrases .section:first-of-type .letter {
+.passphrases .section:first-of-type {
 	margin-top: 0;
 }
 
-.passphrases .section .separator {
-	grid-column: inherit;
+.passphrases .content {
+	display: grid;
+	grid-template-columns: [passphrases-start] min-content 1fr [passphrases-end];
+	grid-template-rows: subgrid;
+	grid-row: section;
+	column-gap: var(--gap);
+}
+@media screen and (width >= 40rem) {
+	.passphrases .content {
+		grid-template-columns: [passphrases-start] min-content 2fr [passphrases-end notes-start] 1fr [notes-end];
+	}
+}
+
+.passphrases .left-margin {
+	display: grid;
+	grid-template-rows: subgrid;
+	grid-row: section;
+	grid-column: left-margin;
+}
+.passphrases .right-margin {
+	display: grid;
+	grid-template-rows: subgrid;
+	grid-row: section;
+	grid-column: right-margin;
+}
+
+.passphrases .heading {
+	position: relative;
+	font-size: 2rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: end;
+	bottom: -0.235em;
+}
+.passphrases .content > .heading {
+	grid-column: passphrases;
+}
+.passphrases .heading.letter {
+	font-size: 5rem;
 }
 
 .passphrase {
 	display: grid;
 	grid-template-columns: subgrid;
 	grid-template-rows: subgrid;
-	grid-column: inherit;
+	grid-column: passphrases;
 	grid-row: span 4;
 	font-size: 1.125rem;
 	border: 1px solid currentColor;
@@ -233,14 +278,17 @@ button:focus-visible {
 	grid-template-columns: subgrid;
 	grid-template-rows: subgrid;
 	grid-column: inherit;
-	grid-row: span 4;
+	grid-row: inherit;
+	gap: 0;
 }
 
 .passphrase tr {
 	display: grid;
 	grid-template-columns: subgrid;
+	grid-template-rows: subgrid;
 	grid-column: inherit;
 	border-bottom: 1px dotted currentColor;
+	gap: 0;
 }
 
 .passphrase tr:last-child {
@@ -277,6 +325,33 @@ button:focus-visible {
 .passphrase .spacer {
 	cursor: default;
 	user-select: none;
+}
+
+.passphrases .notes {
+	display: grid;
+	grid-template-rows: subgrid;
+	grid-template-columns: subgrid;
+	grid-column: notes;
+	grid-row: section;
+}
+
+.notes .heading {
+	cursor: default;
+	user-select: none;
+}
+
+.passphrases .notes .lines {
+	display: grid;
+	grid-row: 3 / section;
+	border: 1px solid currentColor;
+	border-radius: var(--border-radius);
+}
+
+.notes .line {
+	border-bottom: 1px dotted currentColor;
+}
+.notes .line:last-child {
+	border-bottom: none;
 }
 
 @media print {
