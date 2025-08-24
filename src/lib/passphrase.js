@@ -41,10 +41,8 @@ export const generatePassphrases = async ({
 	return Array.from(
 		{ length: count },
 		() =>
-			randomDigit() +
-			randomSymbol() +
-			Array.from({ length }, () => randomWord(words))
-				.map(capitalize)
+			[randomDigit(), randomSymbol()]
+				.concat(Array.from({ length }, () => randomWord(words)).map(capitalize))
 				.join("​"), // Zero Width Space 0x200B
 	);
 };

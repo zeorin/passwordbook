@@ -1,29 +1,21 @@
 import { html } from "../lib/html";
 
 /**
- * @param {number} length
- */
-const spacer = (length) => Array.from({ length }, () => " ​"); // Non-breaking space + Zero Width Space
-
-const labelSpacer = spacer(60);
-const inputSpacer = spacer(80);
-
-/**
  * @param {Object} props
  * @param {string} props.passphrase
  */
 const Passphrase = ({ passphrase }) => html`
 	<table class="passphrase">
 		<tr>
-			<td colspan="2" class="title spacer">${labelSpacer}</td>
+			<td colspan="2" class="title spacer"></td>
 		</tr>
 		<tr>
 			<th class="label">URL</th>
-			<td class="spacer">${inputSpacer}</td>
+			<td class="spacer"></td>
 		</tr>
 		<tr>
 			<th class="label">Login</th>
-			<td class="spacer">${inputSpacer}</td>
+			<td class="spacer"></td>
 		</tr>
 		<tr>
 			<th class="label">Password</th>
@@ -67,11 +59,15 @@ export const Passphrases = ({ passphrases }) =>
 				<div class="passphrases">
 					${group(alphabet, passphrases).map(
 						([letter, passphrases]) => html`
-							<h2 class="letter">${letter}</h2>
-							${passphrases.map(
-								(passphrase) =>
-									html`<${Passphrase} passphrase=${passphrase} />`,
-							)}
+							<section class="section">
+								<h2 class="letter">${letter}</h2>
+								${passphrases.map(
+									(passphrase) => html`
+										<div class="separator" />
+										<${Passphrase} passphrase=${passphrase} />
+									`,
+								)}
+							</section>
 						`,
 					)}
 				</div>

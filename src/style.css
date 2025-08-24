@@ -134,7 +134,9 @@ button:focus-visible {
 .main {
 	width: calc(100% - 2rem);
 	max-width: min(calc(100% - 2rem), 48rem);
-	margin: 2rem auto;
+	margin: auto;
+	margin-top: 2rem;
+	margin-bottom: 1rem;
 }
 
 .loader {
@@ -184,46 +186,60 @@ button:focus-visible {
 	grid-template-columns: min-content 1fr;
 }
 
-.passphrases {
-	display: grid;
-	grid-template-columns: min-content 1fr;
-}
-
 .passphrases .section {
 	display: grid;
 	grid-template-columns: subgrid;
-	grid-column-end: span 2;
+	grid-template-rows: auto;
+	grid-auto-rows: 2rem 1.5fr 1fr 1fr 1fr;
+	grid-column: 1 / -1;
+}
+@media screen and (width >= 32rem) {
+	.passphrases .section {
+		grid-auto-rows: 1rem 1.5fr 1fr 1fr 1fr;
+	}
+}
+@media screen and (width >= 40rem) {
+	.passphrases .section {
+		grid-auto-rows: 0.5rem 1.5fr 1fr 1fr 1fr;
+	}
 }
 
-.passphrases .letter {
-	grid-column-end: span 2;
+.passphrases .section .letter {
+	grid-column: inherit;
 	font-size: 5rem;
 	margin-top: 2rem;
 }
-.passphrases .letter:first-of-type {
+.passphrases .section:first-of-type .letter {
 	margin-top: 0;
+}
+
+.passphrases .section .separator {
+	grid-column: inherit;
 }
 
 .passphrase {
 	display: grid;
 	grid-template-columns: subgrid;
-	grid-column-end: span 2;
+	grid-template-rows: subgrid;
+	grid-column: inherit;
+	grid-row: span 4;
 	font-size: 1.125rem;
-	margin: 0.5rem 0;
 	border: 1px solid currentColor;
 	border-radius: var(--border-radius);
-
-	--inside-padding: 0.5rem;
 }
 
-.passphrase tbody,
-.passphrase tr {
-	display: inherit;
-	grid-template-columns: inherit;
-	grid-column-end: inherit;
+.passphrase tbody {
+	display: grid;
+	grid-template-columns: subgrid;
+	grid-template-rows: subgrid;
+	grid-column: inherit;
+	grid-row: span 4;
 }
 
 .passphrase tr {
+	display: grid;
+	grid-template-columns: subgrid;
+	grid-column: inherit;
 	border-bottom: 1px dotted currentColor;
 }
 
@@ -233,26 +249,26 @@ button:focus-visible {
 
 .passphrase th,
 .passphrase td {
-	display: block;
-	padding: 0.25em;
+	display: flex;
+	padding: 0.25rem;
+	align-items: start;
+}
+.passphrase tr > th:first-child,
+.passphrase tr > td:first-child {
+	padding-left: 0.5rem;
+}
+.passphrase tr > th:last-child,
+.passphrase tr > td:last-child {
+	padding-right: 0.5rem;
 }
 
 .passphrase .title {
-	grid-column-end: span 2;
-}
-
-.passphrase tr:first-child > * {
+	grid-column: inherit;
 	font-size: 1.5rem;
-}
-.passphrase tr > :first-child {
-	padding-left: var(--inside-padding);
-}
-.passphrase tr > :first-child {
-	padding-right: var(--inside-padding);
 }
 
 .passphrase .label {
-	text-align: right;
+	justify-content: end;
 	white-space: pre;
 	cursor: default;
 	user-select: none;
