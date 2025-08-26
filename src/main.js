@@ -8,7 +8,7 @@ import {
 	validate as validateSeed,
 } from "./lib/seed.js";
 import { createEffect, state } from "./lib/state.js";
-import { App } from "./components/app.js";
+import { App } from "./components/App.js";
 
 const container = document.getElementById("app");
 invariant(container instanceof HTMLElement, "Could not find app container!");
@@ -104,4 +104,4 @@ createEffect(() => {
 	render();
 });
 
-generate();
+await generate();

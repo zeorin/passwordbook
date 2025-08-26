@@ -1,0 +1,148 @@
+.passphrases {
+	width: calc(100% - 2rem);
+	max-width: 50rem;
+	margin-left: auto;
+	margin-right: auto;
+
+	@media screen {
+		width: unset;
+		max-width: unset;
+		margin: var(--gap) 0;
+	}
+
+	section {
+		break-before: page;
+		box-decoration-break: clone;
+
+		display: grid;
+		grid-template-columns: var(--grid-template-columns);
+		grid-template-rows:
+			[section-start heading-start] min-content [heading-end content-start] repeat(
+				var(--passphrases),
+				1.5fr 1fr 1fr 1fr
+			)
+			[content-end section-end];
+
+		@media screen {
+			grid-column: page;
+			margin-top: 2rem;
+
+			&:first-of-type {
+				margin-top: 0;
+			}
+		}
+	}
+
+	h2 {
+		string-set: title content();
+
+		grid-row: heading;
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		justify-content: end;
+		bottom: -0.235em;
+		transform: translateY(-1rem);
+		grid-column: passphrases;
+		font-size: 5rem;
+	}
+
+	.tables {
+		display: grid;
+		grid-template-columns: subgrid;
+		grid-template-rows: subgrid;
+		grid-column: page / passphrases;
+		grid-row: content;
+
+		@media screen {
+			border-top: 1px solid var(--color);
+			border-bottom: 1px solid var(--color);
+
+			> :first-child {
+				margin-top: -1px;
+			}
+			> :last-child {
+				margin-bottom: -1px;
+			}
+			> * + * {
+				margin-top: -1px;
+			}
+
+			@media not (width >= 40rem) {
+				grid-column: page;
+			}
+		}
+	}
+
+	aside {
+		/* display: none */
+		display: grid;
+
+		@media screen {
+			display: var(--notes-hide, grid);
+		}
+
+		grid-template-columns: subgrid;
+		grid-template-rows: subgrid;
+		grid-row: section;
+		grid-column: notes / page;
+
+		h3 {
+			grid-row: heading;
+			display: flex;
+			position: relative;
+			flex-direction: column;
+			justify-content: end;
+			bottom: -0.235em;
+			transform: translateY(-1rem);
+			grid-column: notes;
+			font-size: 2rem;
+			cursor: default;
+			user-select: none;
+		}
+
+		.notes {
+			box-decoration-break: clone;
+			display: grid;
+			grid-template-columns: subgrid;
+			grid-column: notes / page;
+			grid-row: content;
+			border-top: 1px solid var(--color);
+			border-bottom: 1px solid var(--color);
+
+			> :first-child {
+				margin-top: -1px;
+			}
+			> :last-child {
+				margin-bottom: -1px;
+			}
+
+			.lines {
+				display: grid;
+				grid-template-columns: subgrid;
+				grid-column: notes;
+				border: 1px solid var(--color);
+				margin-left: -1px;
+
+				> :first-child {
+					margin-top: -1px;
+				}
+				> :last-child {
+					margin-bottom: -1px;
+				}
+				> * + * {
+					margin-top: -1px;
+				}
+
+				> * {
+					grid-column: notes;
+					border-bottom: 1px dotted var(--color);
+					break-inside: avoid;
+				}
+				> :last-child {
+					border-bottom: none;
+				}
+			}
+		}
+	}
+}

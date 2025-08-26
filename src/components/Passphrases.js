@@ -1,28 +1,7 @@
 import { html } from "../lib/html";
+import { Passphrase } from "./Passphrase";
 
-/**
- * @param {Object} props
- * @param {string} props.passphrase
- */
-const Passphrase = ({ passphrase }) => html`
-	<table class="passphrase">
-		<tr>
-			<td colspan="2" class="title spacer"></td>
-		</tr>
-		<tr>
-			<th class="label">URL</th>
-			<td class="spacer"></td>
-		</tr>
-		<tr>
-			<th class="label">Login</th>
-			<td class="spacer"></td>
-		</tr>
-		<tr>
-			<th class="label">Password</th>
-			<td>${passphrase}</td>
-		</tr>
-	</table>
-`;
+import "./Passphrases.css";
 
 const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
@@ -59,30 +38,23 @@ export const Passphrases = ({ passphrases }) =>
 				<div class="passphrases" style="--sections: ${alphabet.length};">
 					${group(alphabet, passphrases).map(
 						([letter, passphrases]) => html`
-							<section class="section" style="--passphrases: ${passphrases.length};">
-								<div class="left-margin"></div>
-  							<div class="content">
-									<h2 class="heading letter">${letter}</h2>
+							<section style="--passphrases: ${passphrases.length}; --section: '${letter}';">
+								<h2>${letter}</h2>
+								<div class="tables">
 									${passphrases.map(
 										(passphrase) => html`
-											<div class="gap"></div>
 											<${Passphrase} passphrase=${passphrase} />
 										`,
 									)}
-									<aside class="notes">
-										<h3 class="heading">Notes</h2>
-										<div class="gap"></div>
+								</div>
+								<aside>
+									<h3>Notes</h2>
+									<div class="notes">
 										<div class="lines">
-											${passphrases.flatMap(() =>
-												Array.from(
-													{ length: 6 },
-													() => html`<div class="line"></div>`,
-												),
-											)}
+											${passphrases.flatMap(() => Array.from({ length: 6 }, () => html`<div></div>`))}
 										</div>
-									</aside>
-  							</div>
-								<div class="right-margin"></div>
+									</div>
+								</aside>
 							</section>
 						`,
 					)}

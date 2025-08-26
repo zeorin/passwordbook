@@ -1,0 +1,43 @@
+@page seed {
+	margin: 0.5in;
+}
+
+.generator {
+	page: seed;
+	font-size: 1.45rem;
+	width: calc(100% - 2rem);
+	max-width: 66.6vw;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 2rem;
+
+	padding-top: 33.3vh;
+
+	@media screen {
+		padding-top: unset;
+		max-width: 60rem;
+	}
+
+	label {
+		display: block;
+		font-weight: 600;
+		margin-bottom: 0.5rem;
+	}
+
+	.seed {
+		@media screen {
+			padding: 0.5rem;
+			border: 2px dotted var(--color);
+			border-radius: var(--border-radius);
+			&:hover {
+				border-color: AccentColor;
+			}
+			&:focus,
+			&:focus-visible {
+				outline: none;
+				border-color: -webkit-focus-ring-color;
+				border-color: AccentColor;
+			}
+		}
+	}
+}

@@ -1,8 +1,8 @@
 import { html } from "../lib/html.js";
 
-import { Loader } from "./loader.js";
-import { Generator } from "./generator.js";
-import { Passphrases } from "./passphrases.js";
+import { Loader } from "./Loader.js";
+import { Generator } from "./Generator.js";
+import { Passphrases } from "./Passphrases.js";
 
 /** @import {State} from "../lib/state.js" */
 
@@ -16,11 +16,7 @@ export const App = ({
 	generatedSeed,
 	passphrases,
 }) => html`
-	<button
-		id="print"
-		class="print"
-		disabled=${isGeneratingSeed || isGeneratingPassphrases}
-	>
+	<button id="print" disabled=${isGeneratingSeed || isGeneratingPassphrases}>
 		Print
 	</button>
 	${isGeneratingSeed

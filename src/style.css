@@ -14,26 +14,70 @@
 	}
 }
 
+@page {
+	@top-left-corner {
+		content: "";
+	}
+	@top-left {
+		content: "";
+	}
+	@top-center {
+		content: "";
+	}
+	@top-right {
+		content: "";
+	}
+	@top-right-corner {
+		content: "";
+	}
+	@bottom-left-corner {
+		content: "";
+	}
+	@bottom-left {
+		content: "";
+	}
+	@bottom-center {
+		content: "";
+	}
+	@bottom-right {
+		content: "";
+	}
+	@bottom-right-corner {
+		content: "";
+	}
+	@left-top {
+		content: "";
+	}
+	@left-middle {
+		content: "";
+	}
+	@left-bottom {
+		content: "";
+	}
+	@right-top {
+		content: "";
+	}
+	@right-middle {
+		content: "";
+	}
+	@right-bottom {
+		content: "";
+	}
+}
+
 :root {
-	font-family:
-		-apple-system,
-		BlinkMacSystemFont,
-		avenir next,
-		avenir,
-		segoe ui,
-		helvetica neue,
-		Adwaita Sans,
-		Cantarell,
-		Ubuntu,
-		roboto,
-		noto,
-		helvetica,
-		arial,
-		sans-serif;
+	--font-family:
+		-apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui,
+		helvetica neue, Adwaita Sans, Cantarell, Ubuntu, roboto, noto, helvetica,
+		arial, sans-serif;
+
+	font-family: var(--font-family);
 
 	color-scheme: light dark;
-	color: rgba(255, 255, 255, 0.87);
-	background-color: #242424;
+	--color: rgba(255, 255, 255, 0.87);
+	--background-color: #242424;
+	color: var(--color);
+	background-color: var(--background-color);
 
 	font-synthesis: none;
 	text-rendering: optimizeLegibility;
@@ -41,10 +85,33 @@
 	-moz-osx-font-smoothing: grayscale;
 
 	--border-radius: 0.5rem;
+	--gap: 2rem;
 }
-
-body {
-	min-height: 100vh;
+@media screen {
+	:root {
+		--grid-template-columns: [page-start left-margin-start]
+			minmax(var(--gap), calc(calc(100% - 60rem) / 2)) [left-margin-end
+			content-start passphrases-start] 2fr [passphrases-end notes-start] 1fr
+			[notes-end content-end right-margin-start]
+			minmax(var(--gap), calc(calc(100% - 60rem) / 2)) [right-margin-end
+			page-end];
+	}
+}
+@media screen and not (width >= 60rem) {
+	:root {
+		--gap: 1.5rem;
+	}
+}
+@media screen and not (width >= 40rem) {
+	:root {
+		--notes-hide: none !important;
+		--gap: 1rem;
+		--grid-template-columns: [page-start left-margin-start]
+			minmax(var(--gap), calc(calc(100% - 60rem) / 2)) [left-margin-end
+			content-start passphrases-start] 1fr [passphrases-end content-end
+			right-margin-start] minmax(var(--gap), calc(calc(100% - 60rem) / 2))
+			[right-margin-end page-end];
+	}
 }
 
 input,
@@ -92,8 +159,8 @@ button:focus-visible {
 
 @media (prefers-color-scheme: light) {
 	:root {
-		color: #213547;
-		background-color: #ffffff;
+		--color: #213547;
+		--background-color: #ffffff;
 	}
 	a:hover {
 		color: #747bff;
@@ -103,263 +170,73 @@ button:focus-visible {
 	}
 }
 
-.header {
+header {
+	grid-column: content;
 	text-align: center;
-	margin-bottom: 2rem;
+	break-after: page;
+
+	padding-top: 33.3vh;
+
+	@media screen {
+		padding-top: unset;
+	}
+
+	h1 {
+		font-size: 3.2rem;
+		line-height: 1.1;
+		margin: 2rem 0;
+		cursor: default;
+	}
+
+	p {
+		display: none;
+
+		@media screen {
+			display: block;
+			font-style: italic;
+			margin: 2rem 0;
+			cursor: default;
+		}
+	}
 }
 
-.header .title {
-	font-size: 3.2rem;
-	line-height: 1.1;
-	margin: 2rem 0;
-	cursor: default;
-}
-
-.header .subtitle {
-	font-style: italic;
-	margin: 2rem 0;
-	cursor: default;
-}
-
-.noscript {
+noscript p {
 	width: calc(100% - 2rem);
 	max-width: min(calc(100% - 2rem), 40rem);
 	margin: 2rem auto;
 }
 
-.no-js .main {
+.no-js main {
 	display: none;
 }
 
-.main {
-	--content-width: 60rem;
-	margin-top: 2rem;
-	margin-bottom: 1rem;
-}
-
-.loader {
-	font-size: 1.45rem;
-	font-weight: 600;
-	text-align: center;
-	margin: 4rem auto 2rem;
-}
-
-.generator {
-	width: calc(100% - 2rem);
-	max-width: min(calc(100% - 2rem), var(--content-width));
-	margin: 0 auto;
-	margin-bottom: 2rem;
-	font-size: 1.45rem;
-}
-
-.print {
+#print {
+	grid-column: content;
+	align-self: center;
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
 	margin-bottom: 1rem;
 }
 
-.generator .label {
-	display: block;
-	font-weight: 600;
-	margin-bottom: 0.5rem;
-}
-
-.generator .seed {
-	margin: 0;
-	padding: 0.5rem;
-	border: 2px dotted currentColor;
-	border-radius: var(--border-radius);
-}
-.generator .seed:hover {
-	border-color: AccentColor;
-}
-.generator .seed:focus,
-.generator .seed:focus-visible {
-	outline: none;
-	border-color: -webkit-focus-ring-color;
-	border-color: AccentColor;
-}
-
-.passphrases {
-	--gap: 2rem;
-	display: grid;
-	grid-template-columns:
-		[left-margin-start] auto [left-margin-end content-start]
-		min(calc(100% - 2rem), var(--content-width))
-		[content-end right-margin-start] auto [right-margin-end];
-}
-@media screen and (width >= 32rem) {
-	.passphrases {
-		--gap: 1.5rem;
-	}
-}
-@media screen and (width >= 40rem) {
-	.passphrases {
-		--gap: 1rem;
-	}
-}
-@media screen and not (width >= 40rem) {
-	.notes {
-		display: none !important;
-	}
-}
-
-.passphrases .section {
-	display: grid;
-	grid-template-columns: subgrid;
-	grid-template-rows:
-		[section-start] auto repeat(
-			var(--passphrases),
-			var(--gap) 1.5fr 1fr 1fr 1fr
-		)
-		[section-end];
-	grid-column: 1 / -1;
-	margin-top: 2rem;
-}
-.passphrases .section:first-of-type {
-	margin-top: 0;
-}
-
-.passphrases .content {
-	display: grid;
-	grid-template-columns: [passphrases-start] min-content 1fr [passphrases-end];
-	grid-template-rows: subgrid;
-	grid-row: section;
-	column-gap: var(--gap);
-}
-@media screen and (width >= 40rem) {
-	.passphrases .content {
-		grid-template-columns: [passphrases-start] min-content 2fr [passphrases-end notes-start] 1fr [notes-end];
-	}
-}
-
-.passphrases .left-margin {
-	display: grid;
-	grid-template-rows: subgrid;
-	grid-row: section;
-	grid-column: left-margin;
-}
-.passphrases .right-margin {
-	display: grid;
-	grid-template-rows: subgrid;
-	grid-row: section;
-	grid-column: right-margin;
-}
-
-.passphrases .heading {
-	position: relative;
-	font-size: 2rem;
-	display: flex;
-	flex-direction: column;
-	justify-content: end;
-	bottom: -0.235em;
-}
-.passphrases .content > .heading {
-	grid-column: passphrases;
-}
-.passphrases .heading.letter {
-	font-size: 5rem;
-}
-
-.passphrase {
-	display: grid;
-	grid-template-columns: subgrid;
-	grid-template-rows: subgrid;
-	grid-column: passphrases;
-	grid-row: span 4;
-	font-size: 1.125rem;
-	border: 1px solid currentColor;
-	border-radius: var(--border-radius);
-}
-
-.passphrase tbody {
-	display: grid;
-	grid-template-columns: subgrid;
-	grid-template-rows: subgrid;
-	grid-column: inherit;
-	grid-row: inherit;
-	gap: 0;
-}
-
-.passphrase tr {
-	display: grid;
-	grid-template-columns: subgrid;
-	grid-template-rows: subgrid;
-	grid-column: inherit;
-	border-bottom: 1px dotted currentColor;
-	gap: 0;
-}
-
-.passphrase tr:last-child {
-	border-bottom: none;
-}
-
-.passphrase th,
-.passphrase td {
-	display: flex;
-	padding: 0.25rem;
-	align-items: start;
-}
-.passphrase tr > th:first-child,
-.passphrase tr > td:first-child {
-	padding-left: 0.5rem;
-}
-.passphrase tr > th:last-child,
-.passphrase tr > td:last-child {
-	padding-right: 0.5rem;
-}
-
-.passphrase .title {
-	grid-column: inherit;
-	font-size: 1.5rem;
-}
-
-.passphrase .label {
-	justify-content: end;
-	white-space: pre;
-	cursor: default;
-	user-select: none;
-}
-
-.passphrase .spacer {
-	cursor: default;
-	user-select: none;
-}
-
-.passphrases .notes {
-	display: grid;
-	grid-template-rows: subgrid;
-	grid-template-columns: subgrid;
-	grid-column: notes;
-	grid-row: section;
-}
-
-.notes .heading {
-	cursor: default;
-	user-select: none;
-}
-
-.passphrases .notes .lines {
-	display: grid;
-	grid-row: 3 / section;
-	border: 1px solid currentColor;
-	border-radius: var(--border-radius);
-}
-
-.notes .line {
-	border-bottom: 1px dotted currentColor;
-}
-.notes .line:last-child {
-	border-bottom: none;
-}
-
 @media print {
-	.subtitle {
+	:root {
+		font-size: 10pt;
+		color: black;
+		--grid-template-columns: [page-start left-margin-start] 0 [left-margin-end
+			content-start passphrases-start] 2fr [passphrases-end notes-start] 1fr
+			[notes-end content-end right-margin-start] 0 [right-margin-end page-end];
+	}
+
+	#print {
 		display: none;
 	}
 
-	.print {
+	.header {
+		page: cover;
+		padding-top: 20%;
+	}
+	.header__subtitle {
 		display: none;
 	}
 }

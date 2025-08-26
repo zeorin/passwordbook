@@ -1,5 +1,7 @@
 import { html } from "../lib/html";
 
+import "./Generator.css";
+
 /**
  * @param {Object} props
  * @param {string=} props.seed
@@ -7,7 +9,7 @@ import { html } from "../lib/html";
  */
 export const Generator = ({ seed }) => html`
 	<form id="generator" class="generator" action="#">
-		<label for="seed" class="label">Seed phrase</label>
+		<label for="seed">Seed phrase</label>
 		<p
 			id="seed"
 			class="seed"

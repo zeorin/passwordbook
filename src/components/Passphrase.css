@@ -1,0 +1,60 @@
+.passphrase {
+	width: 100%;
+	display: grid;
+	grid-template-columns: [passphrases-start label-start] min-content [label-end value-start] auto [value-end passphrases-end];
+	grid-template-rows: subgrid;
+	grid-column: passphrases;
+	grid-row: span 4;
+	font-size: 1.125rem;
+	border: 1px solid var(--color);
+	break-inside: avoid;
+}
+
+.passphrase__body {
+	display: grid;
+	grid-template-columns: subgrid;
+	grid-template-rows: subgrid;
+	grid-column: passphrases;
+	grid-row: inherit;
+}
+
+.passphrase__row {
+	display: grid;
+	grid-template-columns: subgrid;
+	grid-template-rows: subgrid;
+	grid-column: passphrases;
+	border-bottom: 1px dotted var(--color);
+}
+
+.passphrase__row:last-child {
+	border-bottom: none;
+}
+
+.passphrase__cell {
+	display: flex;
+	padding: 0.25rem;
+	align-items: start;
+}
+.passphrase__cell:first-child {
+	padding-left: 0.5rem;
+}
+.passphrase__cell:last-child {
+	padding-right: 0.5rem;
+}
+
+.passphrase__cell--title {
+	grid-column: passphrases;
+	font-size: 1.5rem;
+}
+
+.passphrase__cell--label {
+	justify-content: end;
+	white-space: pre;
+	cursor: default;
+	user-select: none;
+}
+
+.passphrase__cell--spacer {
+	cursor: default;
+	user-select: none;
+}
